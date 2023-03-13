@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ChatGPT API를 통해 결과 조회하기</title>
+    <title>GPT-3 모델 API 활용한 질문하기</title>
     <link rel="stylesheet" href="/css/table.css"/>
     <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
@@ -14,7 +14,7 @@
             $("#btnSend").on("click", function () {
 
                 $.ajax({ // Ajax 호출
-                        url: "/gpt/gptResult",
+                        url: "/gpt/gpt3",
                         type: "post", // 전송방식은 Post
                         data: $("#f").serialize(), // form 태그 내 input 등 객체를 자동으로 전송할 형태로 변경하기
                         dataType: "JSON", // 전송 결과는 JSON으로 받기
@@ -34,20 +34,20 @@
     </script>
 </head>
 <body>
-<h2>ChatGPT API를 통해 궁금한 질문하기</h2>
+<h2>GPT-3 모델 API 활용한 질문하기</h2>
 <hr/>
 <br/><br/>
 <form name="f" id="f">
     <div class="divTable minimalistBlack">
         <div class="divTableBody">
             <div class="divTableRow">
-                <div class="divTableCell" style="width: 30%">Chat GPT에게 물어볼 질문</div>
-                <div class="divTableCell" style="width: 70%"><input type="text" name="prompt"></div>
+                <div class="divTableCell" style="width: 30%">GPT 3에게 물어볼 질문</div>
+                <div class="divTableCell" style="width: 70%"><input type="text" name="prompt" style="width: 90%"></div>
             </div>
         </div>
     </div>
     <div>
-        <button id="btnSend" type="button">ChatGPT에게 질문하기</button>
+        <button id="btnSend" type="button">GPT 3에게 질문하기</button>
     </div>
 </form>
 <br/>
@@ -55,7 +55,7 @@
 <div class="divTable minimalistBlack">
     <div class="divTableHeading">
         <div class="divTableRow">
-            <div class="divTableHead">Chat GPT 질의 응답 결과는 어떤가요?</div>
+            <div class="divTableHead">GPT 질의 응답 결과는 어떤가요?</div>
         </div>
     </div>
     <div class="divTableBody" id="gptResult">
