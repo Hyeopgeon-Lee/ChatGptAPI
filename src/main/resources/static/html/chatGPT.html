@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatGPT API를 통해 결과 조회하기</title>
+    <link rel="stylesheet" href="/css/table.css"/>
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+
+        // HTML로딩이 완료되고, 실행됨
+        $(document).ready(function () {
+
+            // 버튼 클릭했을때, 발생되는 이벤트 생성함(onclick 이벤트와 동일함)
+            $("#btnSend").on("click", function () {
+
+                $.ajax({ // Ajax 호출
+                        url: "/gpt/gptResult",
+                        type: "post", // 전송방식은 Post
+                        data: $("#f").serialize(), // form 태그 내 input 등 객체를 자동으로 전송할 형태로 변경하기
+                        dataType: "JSON", // 전송 결과는 JSON으로 받기
+                        success: function (json) { // /melon/getSongList 호출이 성공했다면..
+                            $("#gptResult").append("<div class=\"divTableRow\">");
+                            $("#gptResult").append("<div class=\"divTableCell\">질문 : " + json.prompt + "</div>");
+                            $("#gptResult").append("</div>");
+
+                            $("#gptResult").append("<div class=\"divTableRow\">");
+                            $("#gptResult").append("<div class=\"divTableCell\">" + json.result + "</div>");
+                            $("#gptResult").append("</div>");
+                        }
+                    }
+                )
+            })
+        })
+    </script>
+</head>
+<body>
+<h2>ChatGPT API를 통해 궁금한 질문하기</h2>
+<hr/>
+<br/><br/>
+<form name="f" id="f">
+    <div class="divTable minimalistBlack">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell" style="width: 30%">Chat GPT에게 물어볼 질문</div>
+                <div class="divTableCell" style="width: 70%"><input type="text" name="prompt"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button id="btnSend" type="button">ChatGPT에게 질문하기</button>
+    </div>
+</form>
+<br/>
+<br/>
+<div class="divTable minimalistBlack">
+    <div class="divTableHeading">
+        <div class="divTableRow">
+            <div class="divTableHead">Chat GPT 질의 응답 결과는 어떤가요?</div>
+        </div>
+    </div>
+    <div class="divTableBody" id="gptResult">
+        <div class="divTableRow">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
