@@ -47,11 +47,11 @@ public class GptService implements IGptService {
 
 //        결과 예 : {"id":"cmpl-6tdNxSufA5SeTksxKLhqspBcqKExk","object":"text_completion","created":1678717457,"model":"text-davinci-003","choices":[{"text":"\n\n- 겨울 계절은
         // 결과는 choices 항목의 text 항목에 저장됨
-        String json = NetworkUtil.post(gpt3Api, header, param); // ChatGPT 응답 결과
+        String json = NetworkUtil.post(gpt3Api, header, param); // GPT 응답 결과
 
         log.info("json : " + json);
 
-        String result = ""; // ChatGPT 전체 답변
+        String result = ""; // GPT 전체 답변
 
         // ChatGPT 응답 메시지를 Map 객체로 변환하기
         Map<String, Object> rMap = new ObjectMapper().readValue(json, HashMap.class);
@@ -59,7 +59,7 @@ public class GptService implements IGptService {
         List<Map> rList = (List<Map>) rMap.get("choices");
 
         for (Map<String, Object> answer : rList) {
-            result += answer.get("text");
+            result += CmmUtil.nvl((String) answer.get("text"));
 
         }
 
